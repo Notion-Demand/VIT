@@ -1,0 +1,223 @@
+import streamlit as st
+import pandas as pd
+import numpy as np
+import missingno as msno
+from xgboost import XGBClassifier
+from imblearn.over_sampling import SMOTE
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, classification_report, confusion_matrix
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
+import plotly.express as px
+import plotly.graph_objects as go
+
+# Set custom page config
+st.set_page_config(page_title="Fraud Detection Model", layout="wide", initial_sidebar_state="expanded")
+
+# Custom CSS
+st.markdown("""
+    <style>
+    body {
+        background-color: #f5f5f5;
+        color: #333;
+        font-family: 'Arial', sans-serif;
+    }
+    .reportview-container {
+        background: #f5f5f5;
+    }
+    .sidebar .sidebar-content {
+        background: #444;
+        color: #fff;
+    }
+    .stButton {
+        color: white;
+    }
+    .stButton>button {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+    }
+    .stButton>button:hover {
+        background-color: #45a049;
+    }
+    .stDataFrame {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+    .stTextInput>div>input {
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+def load_data(file):
+    data = pd.read_csv(file)
+    return data
+
+def preprocess_and_train(df):
+    target_column = 'FraudFound_P'
+    
+    le = LabelEncoder()
+    for col in df.select_dtypes(include=['object']).columns:
+        df[col] = le.fit_transform(df[col].astype(str))
+    
+    X = df.drop(columns=[target_column])
+    y = df[target_column]
+
+    categorical_features = X.select_dtypes(include=['object']).columns
+    numerical_features = X.select_dtypes(include=[np.number]).columns
+
+    numeric_transformer = Pipeline(steps=[
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', StandardScaler())])
+
+    categorical_transformer = Pipeline(steps=[
+        ('imputer', SimpleImputer(strategy='most_frequent')),
+        ('onehot', OneHotEncoder(handle_unknown='ignore'))])
+
+    preprocessor = ColumnTransformer(
+        transformers=[
+            ('num', numeric_transformer, numerical_features),
+            ('cat', categorical_transformer, categorical_features)])
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, stratify=y, random_state=42)
+
+    smote = SMOTE(random_state=42, sampling_strategy='auto')
+    X_train_smote, y_train_smote = smote.fit_resample(X_train, y_train)
+
+    model = XGBClassifier(random_state=42, scale_pos_weight=len(y_train_smote)/sum(y_train_smote))
+
+    param_grid = {
+        'n_estimators': [100, 200],
+        'learning_rate': [0.01, 0.1],
+        'max_depth': [3, 5, 7],
+        'subsample': [0.8, 1.0],
+        'colsample_bytree': [0.8, 1.0],
+    }
+
+    grid_search = GridSearchCV(estimator=model, param_grid=param_grid, scoring='f1', cv=5)
+    pipeline = Pipeline(steps=[('preprocessor', preprocessor), ('model', grid_search)])
+
+    pipeline.fit(X_train_smote, y_train_smote)
+
+    y_pred = pipeline.predict(X_test)
+    y_prob = pipeline.predict_proba(X_test)[:, 1]
+
+    results = {
+        "Accuracy": accuracy_score(y_test, y_pred),
+        "Precision": precision_score(y_test, y_pred),
+        "Recall": recall_score(y_test, y_pred),
+        "F1 Score": f1_score(y_test, y_pred),
+        "ROC AUC Score": roc_auc_score(y_test, y_prob),
+        "Classification Report": classification_report(y_test, y_pred),
+        "Confusion Matrix": confusion_matrix(y_test, y_pred)
+    }
+
+    return results
+
+def plot_graphs(df):
+    df_fraud = df[df['FraudFound_P'] == 1]
+
+    fraud_counts = df['FraudFound_P'].value_counts().reset_index()
+    fraud_counts.columns = ['FraudFound_P', 'Count']
+
+    fig1 = px.pie(fraud_counts, names='FraudFound_P', values='Count',
+                  color_discrete_map={0: '#e7191f', 1: '#1F77B4'})
+    fig1.update_traces(marker=dict(line=dict(color='white', width=2)))
+    fig1.update_layout(title={"text": "Fraud vs Non-Fraud Cases", "x": 0.5}, title_x=0.4)
+    st.plotly_chart(fig1)
+
+    fraud_counts_sex = df_fraud['Sex'].value_counts()
+    fig2 = go.Figure(data=[go.Bar(x=fraud_counts_sex.index, y=fraud_counts_sex.values, marker_color=['#17BECF', '#e7191f'])])
+    fig2.update_layout(title={"text": "Fraud Detection by Sex", "x": 0.5}, title_x=0.4, xaxis=dict(title='Sex'), yaxis=dict(title='Count'))
+    st.plotly_chart(fig2)
+
+    df_counts_age = df['Age'].value_counts().sort_index()
+    df_counts_fraud = df_fraud['Age'].value_counts().sort_index()
+    df_percentages_fraud = round((df_counts_fraud / df_counts_age) * 100, 2)
+
+    fig3 = go.Figure(data=[go.Bar(x=df_percentages_fraud.index, y=df_percentages_fraud.values, marker_color='#17BECF')])
+    fig3.update_layout(title={"text": "Fraud Detection by Age", "x": 0.5}, title_x=0.4, xaxis=dict(title='Age'), yaxis=dict(title='Percentage'))
+    st.plotly_chart(fig3)
+
+    df_counts_make = df['Make'].value_counts().sort_index()
+    df_counts_fraud_make = df_fraud['Make'].value_counts().sort_index()
+    df_percentages_fraud_make = pd.DataFrame(round((df_counts_fraud_make / df_counts_make) * 100, 2)).fillna(0).reset_index()
+    df_percentages_fraud_make.columns = ['Make', 'Fraud %']
+    df_percentages_fraud_make = df_percentages_fraud_make.sort_values(by=['Fraud %', 'Make'])
+
+    fig4 = go.Figure(data=[go.Bar(x=df_percentages_fraud_make['Fraud %'], y=df_percentages_fraud_make['Make'], orientation='h', marker_color='#e7191f')])
+    fig4.update_layout(title={"text": "Fraud Detection by Make", "x": 0.5}, title_x=0.4, xaxis=dict(title='Fraud %'), yaxis=dict(title='Make'))
+    st.plotly_chart(fig4)
+
+    df_counts_vp = df['VehiclePrice'].value_counts().sort_index()
+    df_counts_fraud_vp = df_fraud['VehiclePrice'].value_counts().sort_index()
+    df_percentages_fraud_vp = pd.DataFrame(round((df_counts_fraud_vp / df_counts_vp) * 100, 2)).fillna(0).reset_index()
+    df_percentages_fraud_vp.columns = ['VehiclePrice', 'Fraud %']
+    df_percentages_fraud_vp = df_percentages_fraud_vp.sort_values(by=['Fraud %'])
+
+    fig5 = go.Figure(data=[go.Bar(x=df_percentages_fraud_vp['Fraud %'], y=df_percentages_fraud_vp['VehiclePrice'], orientation='h', marker_color='#27e623')])
+    fig5.update_layout(title={"text": "Fraud Detection by Vehicle Price", "x": 0.5}, title_x=0.4, xaxis=dict(title='Percentage'), yaxis=dict(title='VehiclePrice'))
+    st.plotly_chart(fig5)
+
+    df_counts_aov = df['AgeOfVehicle'].value_counts().sort_index()
+    df_counts_fraud_aov = df_fraud['AgeOfVehicle'].value_counts().sort_index()
+    df_percentages_fraud_aov = pd.DataFrame(round((df_counts_fraud_aov / df_counts_aov) * 100, 2)).fillna(0).reset_index()
+    df_percentages_fraud_aov.columns = ['AgeOfVehicle', 'Fraud %']
+    df_percentages_fraud_aov = df_percentages_fraud_aov.sort_values(by=['Fraud %'])
+
+    fig6 = go.Figure(data=[go.Bar(x=df_percentages_fraud_aov['Fraud %'], y=df_percentages_fraud_aov['AgeOfVehicle'], orientation='h', marker_color='rgb(255, 165, 0)')])
+    fig6.update_layout(title={"text": "Fraud Detection by Age of Vehicle", "x": 0.5}, title_x=0.4, xaxis=dict(title='Percentage'), yaxis=dict(title='AgeOfVehicle'))
+    st.plotly_chart(fig6)
+    
+def highlight_fraud(row):
+    return ['background-color: red' if row.FraudFound_P == 1 else '' for _ in row]
+
+def main():
+    st.title("Fraud Detection Model")
+
+    st.write("Upload a dataset to get started")
+
+    uploaded_file = st.file_uploader("Choose a file", type=["csv"])
+    
+    if uploaded_file is not None:
+        data = load_data(uploaded_file)
+        st.write("Dataset Loaded Successfully!")
+        st.write("First 5 rows of the dataset:")
+        st.write(data.head())
+
+        st.write("Generating graphs...")
+        plot_graphs(data)
+
+        st.write("Highlighting fraud rows in the dataset...")
+
+        # Increase the max elements for Pandas Styler
+        pd.set_option("styler.render.max_elements", data.size)
+        
+        styled_data = data.style.apply(highlight_fraud, axis=1)
+        st.write("Highlighted Dataset:")
+        st.dataframe(styled_data)
+
+        if st.button("Run Model"):
+            with st.spinner("Processing..."):
+                results = preprocess_and_train(data)
+                st.success("Model Run Successfully!")
+                st.write("Model Results:")
+                st.write(f"Accuracy: {results['Accuracy']}")
+                st.write(f"Precision: {results['Precision']}")
+                st.write(f"Recall: {results['Recall']}")
+                st.write(f"F1 Score: {results['F1 Score']}")
+                st.write(f"ROC AUC Score: {results['ROC AUC Score']}")
+                st.write("--------------------------------------------------------------------------------------------")
+                st.write("Classification Report:")
+                st.text(results['Classification Report'])
+                st.write("--------------------------------------------------------------------------------------------")
+                st.write("Confusion Matrix:")
+                st.write(results['Confusion Matrix'])
+
+if __name__ == '__main__':
+    main()
+
