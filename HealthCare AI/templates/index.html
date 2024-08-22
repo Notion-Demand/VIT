@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Report Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='animations.js') }}" defer></script>
+</head>
+<body>
+    <div class="header">
+        <h1>Blood Report Analyzer</h1>
+        <p>Upload your blood report to get a detailed analysis</p>
+    </div>
+    <div class="container">
+        <form action="/" method="post" enctype="multipart/form-data">
+            <div class="file-upload">
+                <label for="file-upload" class="custom-file-upload">
+                    Choose PDF File
+                </label>
+                <input id="file-upload" type="file" name="file" accept=".pdf" required />
+            </div>
+            <button type="submit" class="analyze-button">Upload and Analyze</button>
+        </form>
+
+        {% if patient_name %}
+        <div class="result animate__animated animate__fadeInUp">
+            <h2>Analyzing Report of <span>{{ patient_name }}</span></h2>
+            <p>{{ summary }}</p>
+            {% if analysis %}
+            <div class="analysis-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Test Name</th>
+                            <th>Result</th>
+                            <th>Normal Range</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for test_name, (value, normal_range, status) in analysis.items() %}
+                        <tr>
+                            <td>{{ test_name }}</td>
+                            <td>{{ value }}</td>
+                            <td>{{ normal_range[0] }} - {{ normal_range[1] }}</td>
+                            <td class="{{ status }}">{{ status }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+
+            {% if precautions %}
+            <div class="precautions">
+                <h3>Precautions</h3>
+                <ul>
+                    {% for test_name, precaution in precautions.items() %}
+                    <li><strong>{{ test_name }}:</strong> {{ precaution }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% else %}
+            <p>All Good</p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Blood Report Analyzer. All Rights Reserved.</p>
+    </div>
+</body>
+</html>
