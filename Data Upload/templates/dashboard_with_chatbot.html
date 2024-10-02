@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard with Chatbot - Dark Theme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-color: #1b1b1b; /* Darker background */
+            color: #e0e0e0; /* Lighter text for readability */
+            font-family: Arial, sans-serif;
+            display: flex;
+            margin: 0;
+        }
+
+        h1, h2 {
+            color: #ffffff;
+        }
+
+        .sidebar {
+            width: 60px;
+            background-color: #333;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            position: fixed;
+        }
+
+        .icon {
+            color: #fff;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .icon a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+        }
+
+        .icon a:hover {
+            color: #4CAF50; /* Change color on hover */
+        }
+
+        .main {
+            margin-left: 80px; /* Adjust margin to account for the sidebar width */
+            flex: 1;
+            padding: 20px;
+        }
+
+        .graph-container {
+            background-color: #2c2c2c; /* Darker background for graphs */
+            padding: 20px;
+            border-radius: 15px; /* Slightly rounded corners */
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+        }
+
+        .cards {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: #2c2c2c; /* Darker background for the card */
+            border-radius: 15px; /* Rounded corners */
+            padding: 20px;
+            width: 23%;
+            text-align: center;
+            color: #ffffff; /* White text */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+        }
+
+        .card h2 {
+            font-size: 2em;
+            margin: 0;
+            color: #4caf50; /* Green accent for numbers */
+        }
+
+        .card p {
+            margin: 10px 0;
+            color: #aaaaaa; /* Lighter gray for description */
+        }
+
+        .card a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #4caf50; /* Green button */
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        #chatbot-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1e88e5;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        #chatbot-box {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: #333;
+            border: 1px solid #555;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #chatbot-messages {
+            padding: 10px;
+            height: 350px;
+            overflow-y: scroll;
+            background-color: #444;
+            color: white;
+        }
+
+        #chatbot-input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-top: 1px solid #555;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="icon">
+            <a href="#"><i class="fas fa-headset"></i></a>
+        </div>
+        <div class="icon">
+            <a href="#"><i class="fas fa-check"></i></a>
+        </div>
+        <div class="icon">
+            <a href="#"><i class="fas fa-users"></i></a>
+        </div>
+        <div class="icon">
+            <a href="#"><i class="fas fa-comment"></i></a>
+        </div>
+        <div class="icon">
+            <a href="#"><i class="fas fa-cog"></i></a>
+        </div>
+        <div class="icon">
+            <a href="#"><i class="fas fa-arrow-left"></i><i class="fas fa-bolt"></i></a>
+        </div>
+    </div>
+    <div class="main">
+        <h1>Dashboard - Dark Theme</h1>
+        <h2>Graphs</h2>
+        <div class="graph-container">{{ graphs['current_week']|safe }}</div>
+        <div class="graph-container">{{ graphs['data_origin']|safe }}</div>
+        <div class="graph-container">{{ graphs['avg_resolution']|safe }}</div>
+
+        <!-- Cards -->
+        <div class="cards">
+            <div class="card">
+                <h2>{{ cards['retailers'] }}</h2>
+                <p>Total Retailers</p>
+                <a href="#">View</a>
+            </div>
+            <div class="card">
+                <h2>{{ cards['customers'] }}</h2>
+                <p>Customers</p>
+                <a href="#">View</a>
+            </div>
+            <div class="card">
+                <h2>{{ cards['escalations'] }}</h2>
+                <p>Performance Escalations</p>
+                <a href="#">View</a>
+            </div>
+            <div class="card">
+                <h2>{{ cards['issues'] }}</h2>
+                <p>Total Issues</p>
+                <a href="#">View</a>
+            </div>
+        </div>
+
+        <!-- Chatbot Button -->
+        <button id="chatbot-btn">Chat</button>
+
+        <!-- Chatbox -->
+        <div id="chatbot-box">
+            <div id="chatbot-messages"></div>
+            <input type="text" id="chatbot-input" placeholder="Ask a question...">
+        </div>
+    </div>
+
+    <!-- JavaScript for chatbot interaction -->
+    <script>
+        document.getElementById('chatbot-btn').addEventListener('click', function() {
+            var chatbotBox = document.getElementById('chatbot-box');
+            chatbotBox.style.display = chatbotBox.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.getElementById('chatbot-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                var question = e.target.value;
+                fetch('/chatbot', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ question: question })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    var chatbotMessages = document.getElementById('chatbot-messages');
+                    var newMessage = document.createElement('div');
+                    newMessage.textContent = "Bot: " + data.answer;
+                    chatbotMessages.appendChild(newMessage);
+                });
+
+                // Add user's question to chatbox
+                var chatbotMessages = document.getElementById('chatbot-messages');
+                var userMessage = document.createElement('div');
+                userMessage.textContent = "You: " + question;
+                chatbotMessages.appendChild(userMessage);
+
+                e.target.value = ''; // Clear input
+            }
+        });
+    </script>
+</body>
+</html>
