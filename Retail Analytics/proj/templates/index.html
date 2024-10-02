@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Product Recommendations</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Recommendations</h1>
+        <form id="recommendationForm">
+            <label for="area">Enter Area:</label>
+            <input type="text" id="area" name="area" required>
+            <label for="sku_id">Enter SKU ID:</label>
+            <input type="text" id="sku_id" name="sku_id" required>
+            <label for="method">Choose Recommendation Method:</label>
+            <select id="method" name="method">
+                <option value="area_popularity">Area Popularity</option>
+                <option value="feature_based">Feature-Based (Content-Based)</option>
+            </select>
+            <button type="submit">Get Recommendations</button>
+        </form>
+
+        <h2>Recommendations</h2>
+        <div id="recommendations"></div>
+
+        <h2>Most Ordered Products</h2>
+        <div id="mostOrdered"></div>
+
+        <h2>Least Ordered Products</h2>
+        <div id="leastOrdered"></div>
+    </div>
+
+    <script>
+        document.getElementById('recommendationForm').onsubmit = function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+
+            fetch('/recommend', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display recommendations
+                const recommendationsDiv = document.getElementById('recommendations');
+                recommendationsDiv.innerHTML = '';
+                if (data.recommendations.length > 0) {
+                    data.recommendations.forEach(item => {
+                        recommendationsDiv.innerHTML += `<p>SKU ID: ${item['SKU ID']}, Ordered Quantity: ${item['Ordered Quantity']}, Gross Merchandise Value: ${item['Gross Merchandise Value']}</p>`;
+                    });
+                } else {
+                    recommendationsDiv.innerHTML = '<p>No recommendations found.</p>';
+                }
+
+                // Display most ordered products
+                const mostOrderedDiv = document.getElementById('mostOrdered');
+                mostOrderedDiv.innerHTML = '';
+                data.most_ordered.forEach(item => {
+                    mostOrderedDiv.innerHTML += `<p>SKU ID: ${item.sku_id}, Ordered Quantity: ${item.ordered_quantity}, Gross Merchandise Value: ${item.gross_merchandise_value}</p>`;
+                });
+
+                // Display least ordered products
+                const leastOrderedDiv = document.getElementById('leastOrdered');
+                leastOrderedDiv.innerHTML = '';
+                data.least_ordered.forEach(item => {
+                    leastOrderedDiv.innerHTML += `<p>SKU ID: ${item.sku_id}, Ordered Quantity: ${item.ordered_quantity}, Gross Merchandise Value: ${item.gross_merchandise_value}</p>`;
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        };
+    </script>
+</body>
+</html>
