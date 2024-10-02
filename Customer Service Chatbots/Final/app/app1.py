@@ -43,6 +43,15 @@ def query_db(query, args=(), one=False):
     con.close()
     return (rv[0] if rv else None) if one else rv
 
+# Helper function to check for key terms in the question
+def check_for_precise_answer(question: str):
+    """Returns a precise answer if the question matches predefined ones."""
+    question_lower = question.lower()
+    for key, value in cards_data.items():
+        if key in question_lower:
+            return value
+    return None
+
 # Main dashboard route with dynamic cards
 @app.route('/')
 def index():
@@ -126,7 +135,7 @@ def chatbot():
     # Start a chat session with the model
     chat_session = model.start_chat(history=[{
         "role": "user",
-        "parts": [{"text": user_question}]
+        "parts": [{"text": str(csv_data)}]
     }])
 
     # Send the user's question to the model

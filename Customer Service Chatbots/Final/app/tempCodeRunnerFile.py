@@ -1,1 +1,1 @@
-/api/sales_by_channel
+.csv
