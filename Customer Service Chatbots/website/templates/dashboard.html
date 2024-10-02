@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            background-color: #2c2c2c;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            padding: 20px;
+        }
+        .graph {
+            margin-bottom: 50px;
+        }
+        .cards {
+            display: flex;
+            justify-content: space-between;
+        }
+        .card {
+            background-color: #444;
+            border-radius: 10px;
+            padding: 20px;
+            width: 23%;
+            text-align: center;
+        }
+        .card h2 {
+            font-size: 2em;
+            margin: 0;
+        }
+        .card p {
+            margin: 10px 0;
+        }
+        .card a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Statistics Dashboard</h1>
+        
+        <!-- Current Week Graph -->
+        <div class="graph">
+            <h2>Current Week Overview</h2>
+            {{ graphs['current_week'] | safe }}
+        </div>
+        
+        <!-- Data Origin Breakdown Graph -->
+        <div class="graph">
+            <h2>Data Origin Breakdown</h2>
+            {{ graphs['data_origin'] | safe }}
+        </div>
+        
+        <!-- Average Resolution Time Graph -->
+        <div class="graph">
+            <h2>Average Resolution Time</h2>
+            {{ graphs['avg_resolution'] | safe }}
+        </div>
+
+        <!-- Cards -->
+        <div class="cards">
+            <div class="card">
+                <h2>{{ cards['retailers'] }}</h2>
+                <p>Total Retailers</p>
+                <a href="#">View</a>
+            </div>
+            <div class="card">
+                <h2>{{ cards['customers'] }}</h2>
+                <p>Customers</p>
+                <a href="#">View</a>
+            </div>
+            <div class="card">
+                <h2>{{ cards['escalations'] }}</h2>
+                <p>Performance Escalations</p>
+                <a href="#">View</a>
+            </div>
+            <div class="card">
+                <h2>{{ cards['issues'] }}</h2>
+                <p>Total Issues</p>
+                <a href="#">View</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

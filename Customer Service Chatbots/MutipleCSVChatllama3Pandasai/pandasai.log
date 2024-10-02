@@ -1,0 +1,1941 @@
+2024-09-26 18:37:51 [INFO] Question: what is the highest salery
+
+2024-09-26 18:37:51 [INFO] Running PandasAI with local LLM...
+2024-09-26 18:37:51 [INFO] Prompt ID: 4173bd78-326f-4214-8ca6-1fec4130e832
+2024-09-26 18:37:51 [INFO] Executing Pipeline: GenerateChatPipeline
+2024-09-26 18:37:51 [INFO] Executing Step 0: ValidatePipelineInput
+2024-09-26 18:37:51 [INFO] Executing Step 1: CacheLookup
+2024-09-26 18:37:51 [INFO] Executing Step 2: PromptGeneration
+2024-09-26 18:37:51 [INFO] Using prompt: <dataframe>
+dfs[0]:150x5
+sepal_length,sepal_width,petal_length,petal_width,species
+4.3,2.6,5.2,2.0,Iris-versicolor
+6.4,3.3,1.7,0.1,Iris-setosa
+5.8,2.4,1.3,2.5,Iris-virginica
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what is the highest salery
+
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2024-09-26 18:37:51 [INFO] Executing Step 3: CodeGenerator
+2024-09-26 18:39:24 [INFO] Question: what is the highest salery
+
+2024-09-26 18:39:24 [INFO] Running PandasAI with local LLM...
+2024-09-26 18:39:24 [INFO] Prompt ID: 8a0a3774-09d7-4bcd-89c1-f10acbe7c381
+2024-09-26 18:39:24 [INFO] Executing Pipeline: GenerateChatPipeline
+2024-09-26 18:39:24 [INFO] Executing Step 0: ValidatePipelineInput
+2024-09-26 18:39:24 [INFO] Executing Step 1: CacheLookup
+2024-09-26 18:39:24 [INFO] Executing Step 2: PromptGeneration
+2024-09-26 18:39:24 [INFO] Using prompt: <dataframe>
+dfs[0]:30x2
+YearsExperience,Salary
+4.5,39343
+1.3,93940
+10.5,64445
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what is the highest salery
+
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2024-09-26 18:39:24 [INFO] Executing Step 3: CodeGenerator
+2024-09-26 18:39:28 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-26 18:39:28 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:150x5
+sepal_length,sepal_width,petal_length,petal_width,species
+4.3,2.6,5.2,2.0,Iris-versicolor
+6.4,3.3,1.7,0.1,Iris-setosa
+5.8,2.4,1.3,2.5,Iris-virginica
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what is the highest salery
+
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2024-09-26 18:39:28 [INFO] Code generated:
+            ```
+            Python
+# Import the required dependencies
+import pandas as pd
+
+# Declare dfs variable
+dfs = [pd.DataFrame({'sepal_length': [4.3, 6.4, 5.8], 'sepal_width': [2.6, 3.3, 2.4], 'petal_length': [5.2, 1.7, 1.3], 'petal_width': [2.0, 0.1, 2.5], 'species': ['Iris-versicolor', 'Iris-setosa', 'Iris-virginica']})]
+
+# Get the highest salary
+highest_salary = dfs[0]['sepal_length'].max()
+
+# Declare result variable as a dictionary of type and value
+result = {"type": "number", "value": 6.4}
+
+print(result)
+            ```
+            
+2024-09-26 18:39:28 [INFO] Executing Step 4: CachePopulation
+2024-09-26 18:39:28 [INFO] Executing Step 5: CodeCleaning
+2024-09-26 18:39:28 [INFO] 
+Code running:
+```
+Python
+highest_salary = dfs[0]['sepal_length'].max()
+result = {'type': 'number', 'value': 6.4}
+print(result)
+        ```
+2024-09-26 18:39:28 [INFO] Executing Step 6: CodeExecution
+2024-09-26 18:39:28 [ERROR] Failed with error: Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 1, in <module>
+NameError: name 'Python' is not defined
+
+2024-09-26 18:39:28 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2024-09-26 18:39:28 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2024-09-26 18:39:28 [INFO] Executing Step 0: ErrorPromptGeneration
+2024-09-26 18:39:28 [INFO] Using prompt: <dataframe>
+dfs[0]:150x5
+sepal_length,sepal_width,petal_length,petal_width,species
+4.3,2.6,5.2,2.0,Iris-versicolor
+6.4,3.3,1.7,0.1,Iris-setosa
+5.8,2.4,1.3,2.5,Iris-virginica
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ what is the highest salery
+
+
+You generated this python code:
+Python
+highest_salary = dfs[0]['sepal_length'].max()
+result = {'type': 'number', 'value': 6.4}
+print(result)
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 1, in <module>
+NameError: name 'Python' is not defined
+
+
+Fix the python code above and return the new python code:
+2024-09-26 18:39:28 [INFO] Executing Step 1: CodeGenerator
+2024-09-26 18:39:32 [INFO] Question: what is the highest salery
+
+2024-09-26 18:39:32 [INFO] Running PandasAI with local LLM...
+2024-09-26 18:39:32 [INFO] Prompt ID: c0d20614-7f46-42f8-8e5f-5faaa7046b62
+2024-09-26 18:39:32 [INFO] Executing Pipeline: GenerateChatPipeline
+2024-09-26 18:39:32 [INFO] Executing Step 0: ValidatePipelineInput
+2024-09-26 18:39:32 [INFO] Executing Step 1: CacheLookup
+2024-09-26 18:39:32 [INFO] Executing Step 2: PromptGeneration
+2024-09-26 18:39:32 [INFO] Using prompt: <dataframe>
+dfs[0]:30x2
+YearsExperience,Salary
+4.1,67938
+9.5,57081
+7.1,91738
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what is the highest salery
+
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2024-09-26 18:39:32 [INFO] Executing Step 3: CodeGenerator
+2024-09-26 18:39:40 [INFO] Question: what is the highest salary
+
+2024-09-26 18:39:40 [INFO] Running PandasAI with local LLM...
+2024-09-26 18:39:40 [INFO] Prompt ID: cab958bd-0c5b-44ff-8a6b-6ed46351bc50
+2024-09-26 18:39:40 [INFO] Executing Pipeline: GenerateChatPipeline
+2024-09-26 18:39:40 [INFO] Executing Step 0: ValidatePipelineInput
+2024-09-26 18:39:40 [INFO] Executing Step 1: CacheLookup
+2024-09-26 18:39:40 [INFO] Executing Step 2: PromptGeneration
+2024-09-26 18:39:40 [INFO] Using prompt: <dataframe>
+dfs[0]:30x2
+YearsExperience,Salary
+7.9,66029
+1.5,60150
+6.8,93940
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what is the highest salary
+
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2024-09-26 18:39:40 [INFO] Executing Step 3: CodeGenerator
+2024-09-26 18:40:10 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-26 18:40:10 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:30x2
+YearsExperience,Salary
+4.5,39343
+1.3,93940
+10.5,64445
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what is the highest salery
+
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2024-09-26 18:40:10 [INFO] Code generated:
+            ```
+            Python
+# Import required dependencies
+import pandas as pd
+
+# Initialize the result dictionary
+result = {}
+
+# Sort the dataframe by the 'Salary' column in descending order (highest to lowest)
+dfs[0] = dfs[0].sort_values('Salary', ascending=False)
+
+# Get the top row which contains the highest salary
+highest_salary_row = dfs[0].head(1)
+
+# Extract the salary value from this row
+highest_salary = highest_salary_row['Salary'].values[0]
+
+# Convert the dictionary into a string
+result = {"type": "string", "value": f"The highest salary is {highest_salary}."}
+
+print(result)
+            ```
+            
+2024-09-26 18:40:10 [INFO] Executing Step 4: CachePopulation
+2024-09-26 18:40:10 [INFO] Executing Step 5: CodeCleaning
+2024-09-26 18:40:10 [INFO] 
+Code running:
+```
+Python
+result = {}
+dfs[0] = dfs[0].sort_values('Salary', ascending=False)
+highest_salary_row = dfs[0].head(1)
+highest_salary = highest_salary_row['Salary'].values[0]
+result = {'type': 'string', 'value': f'The highest salary is {highest_salary}.'}
+print(result)
+        ```
+2024-09-26 18:40:10 [INFO] Executing Step 6: CodeExecution
+2024-09-26 18:40:10 [ERROR] Failed with error: Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 1, in <module>
+NameError: name 'Python' is not defined
+
+2024-09-26 18:40:10 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2024-09-26 18:40:10 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2024-09-26 18:40:10 [INFO] Executing Step 0: ErrorPromptGeneration
+2024-09-26 18:40:10 [INFO] Using prompt: <dataframe>
+dfs[0]:30x2
+YearsExperience,Salary
+4.5,39343
+1.3,93940
+10.5,64445
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ what is the highest salery
+
+
+You generated this python code:
+Python
+result = {}
+dfs[0] = dfs[0].sort_values('Salary', ascending=False)
+highest_salary_row = dfs[0].head(1)
+highest_salary = highest_salary_row['Salary'].values[0]
+result = {'type': 'string', 'value': f'The highest salary is {highest_salary}.'}
+print(result)
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 1, in <module>
+NameError: name 'Python' is not defined
+
+
+Fix the python code above and return the new python code:
+2024-09-26 18:40:10 [INFO] Executing Step 1: CodeGenerator
+2024-09-26 18:40:39 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-26 18:40:39 [ERROR] Pipeline failed on step 1: No code found in the response
+2024-09-26 18:40:39 [ERROR] Pipeline failed on step 6: No code found in the response
+2024-09-26 18:41:37 [INFO] Question: number of rows
+
+2024-09-26 18:41:37 [INFO] Running PandasAI with local LLM...
+2024-09-26 18:41:37 [INFO] Prompt ID: b644bd1c-dfac-462a-b24e-6cf0e31fb552
+2024-09-26 18:41:37 [INFO] Executing Pipeline: GenerateChatPipeline
+2024-09-26 18:41:37 [INFO] Executing Step 0: ValidatePipelineInput
+2024-09-26 18:41:37 [INFO] Executing Step 1: CacheLookup
+2024-09-26 18:41:37 [INFO] Executing Step 2: PromptGeneration
+2024-09-26 18:41:37 [INFO] Using prompt: <dataframe>
+dfs[0]:150x5
+sepal_length,sepal_width,petal_length,petal_width,species
+5.4,4.2,4.5,1.0,Iris-versicolor
+6.8,3.3,3.8,1.7,Iris-setosa
+6.5,3.8,6.0,0.6,Iris-virginica
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ number of rows
+
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2024-09-26 18:41:37 [INFO] Executing Step 3: CodeGenerator
+2024-09-26 18:41:49 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-26 18:41:49 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:30x2
+YearsExperience,Salary
+4.1,67938
+9.5,57081
+7.1,91738
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what is the highest salery
+
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2024-09-26 18:41:49 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt  # Add this line for plotting
+
+dfs = [pd.DataFrame({
+    "YearsExperience": [4.1, 9.5, 7.1],
+    "Salary": [67938, 57081, 91738]
+})]
+
+# Function to find the highest salary
+def get_highest_salary(df):
+    return df['Salary'].max()
+
+# Find the highest salary
+highest_salary = dfs[0]['Salary'].max()
+result = {"type": "string", "value": f"The highest salary is {highest_salary}."}
+
+# Plot the data (optional)
+if True:  # TODO: Make this condition more specific to check if plotting is required
+    plt.figure(figsize=(8, 6))
+    sns.scatterplot(x="YearsExperience", y="Salary", data=dfs[0])
+    plt.title("Highest Salary Scatter Plot")
+    plt.savefig('temp_chart.png')
+    result = {"type": "plot", "value": 'temp_chart.png'}
+
+print(result)
+            ```
+            
+2024-09-26 18:41:49 [INFO] Executing Step 4: CachePopulation
+2024-09-26 18:41:49 [INFO] Executing Step 5: CodeCleaning
+2024-09-26 18:41:49 [INFO] Saving charts to D:\N D\MutipleCSVChatllama3Pandasai\exports\charts\temp_chart.png
+2024-09-26 18:41:49 [INFO] 
+Code running:
+```
+def get_highest_salary(df):
+    return df['Salary'].max()
+
+
+highest_salary = dfs[0]['Salary'].max()
+result = {'type': 'string', 'value': f'The highest salary is {highest_salary}.'}
+if True:
+    plt.figure(figsize=(8, 6))
+    sns.scatterplot(x='YearsExperience', y='Salary', data=dfs[0])
+    plt.title('Highest Salary Scatter Plot')
+    plt.savefig('D:/N D/MutipleCSVChatllama3Pandasai/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': 'D:/N D/MutipleCSVChatllama3Pandasai/exports/charts/temp_chart.png'}
+print(result)
+        ```
+2024-09-26 18:41:49 [INFO] Executing Step 6: CodeExecution
+2024-09-26 18:41:49 [ERROR] Failed with error: Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 9, in <module>
+NameError: name 'sns' is not defined
+
+2024-09-26 18:41:49 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2024-09-26 18:41:49 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2024-09-26 18:41:49 [INFO] Executing Step 0: ErrorPromptGeneration
+2024-09-26 18:41:49 [INFO] Using prompt: <dataframe>
+dfs[0]:30x2
+YearsExperience,Salary
+4.1,67938
+9.5,57081
+7.1,91738
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ what is the highest salery
+
+
+You generated this python code:
+def get_highest_salary(df):
+    return df['Salary'].max()
+
+
+highest_salary = dfs[0]['Salary'].max()
+result = {'type': 'string', 'value': f'The highest salary is {highest_salary}.'}
+if True:
+    plt.figure(figsize=(8, 6))
+    sns.scatterplot(x='YearsExperience', y='Salary', data=dfs[0])
+    plt.title('Highest Salary Scatter Plot')
+    plt.savefig('D:/N D/MutipleCSVChatllama3Pandasai/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': 'D:/N D/MutipleCSVChatllama3Pandasai/exports/charts/temp_chart.png'}
+print(result)
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 9, in <module>
+NameError: name 'sns' is not defined
+
+
+Fix the python code above and return the new python code:
+2024-09-26 18:41:49 [INFO] Executing Step 1: CodeGenerator
+2024-09-26 18:42:46 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-26 18:42:46 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:30x2
+YearsExperience,Salary
+7.9,66029
+1.5,60150
+6.8,93940
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what is the highest salary
+
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2024-09-26 18:42:46 [INFO] Code generated:
+            ```
+            # Import required dependencies
+import pandas as pd
+
+# Initialize dfs list with dataframes
+dfs = [pd.DataFrame({"YearsExperience": [7.9], "Salary": [66029]},
+                     index=[0]),
+       pd.DataFrame({"YearsExperience": [1.5], "Salary": [60150]},
+                     index=[1]),
+       pd.DataFrame({"YearsExperience": [6.8], "Salary": [93940]},
+                     index=[2])]
+
+# Find the highest salary
+highest_salary = max(dfs[0]['Salary'])
+
+# Declare result variable
+result = {"type": "string", 
+          "value": f"The highest salary is {highest_salary}."}
+
+print(result)
+            ```
+            
+2024-09-26 18:42:46 [INFO] Executing Step 4: CachePopulation
+2024-09-26 18:42:46 [INFO] Executing Step 5: CodeCleaning
+2024-09-26 18:42:46 [INFO] 
+Code running:
+```
+highest_salary = max(dfs[0]['Salary'])
+result = {'type': 'string', 'value': f'The highest salary is {highest_salary}.'}
+print(result)
+        ```
+2024-09-26 18:42:46 [INFO] Executing Step 6: CodeExecution
+2024-09-26 18:42:46 [INFO] Executing Step 7: ResultValidation
+2024-09-26 18:42:46 [INFO] Answer: {'type': 'string', 'value': 'The highest salary is 122391.'}
+2024-09-26 18:42:46 [INFO] Executing Step 8: ResultParsing
+2024-09-26 18:43:31 [INFO] Question: what is average value of sepal length
+
+2024-09-26 18:43:31 [INFO] Running PandasAI with local LLM...
+2024-09-26 18:43:31 [INFO] Prompt ID: bc6d39f0-9de7-4a0c-a27a-f40e21d6be34
+2024-09-26 18:43:31 [INFO] Executing Pipeline: GenerateChatPipeline
+2024-09-26 18:43:31 [INFO] Executing Step 0: ValidatePipelineInput
+2024-09-26 18:43:31 [INFO] Executing Step 1: CacheLookup
+2024-09-26 18:43:31 [INFO] Executing Step 2: PromptGeneration
+2024-09-26 18:43:31 [INFO] Using prompt: <dataframe>
+dfs[0]:150x5
+sepal_length,sepal_width,petal_length,petal_width,species
+4.5,3.0,6.6,1.7,Iris-setosa
+4.6,3.1,5.7,0.3,Iris-virginica
+7.1,2.7,3.3,1.2,Iris-versicolor
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what is average value of sepal length
+
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2024-09-26 18:43:31 [INFO] Executing Step 3: CodeGenerator
+2024-09-26 18:43:32 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-26 18:43:32 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:30x2
+YearsExperience,Salary
+4.5,39343
+1.3,93940
+10.5,64445
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ what is the highest salery
+
+
+You generated this python code:
+Python
+result = {}
+dfs[0] = dfs[0].sort_values('Salary', ascending=False)
+highest_salary_row = dfs[0].head(1)
+highest_salary = highest_salary_row['Salary'].values[0]
+result = {'type': 'string', 'value': f'The highest salary is {highest_salary}.'}
+print(result)
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 1, in <module>
+NameError: name 'Python' is not defined
+
+
+Fix the python code above and return the new python code:
+            
+2024-09-26 18:43:32 [INFO] Code generated:
+            ```
+            result = {}
+dfs[0] = dfs[0].sort_values('Salary', ascending=False)
+highest_salary_row = dfs[0].head(1)
+highest_salary = highest_salary_row['Salary'].values[0]
+result = {'type': 'string', 'value': f'The highest salary is {highest_salary}.'}
+print(result)
+            ```
+            
+2024-09-26 18:43:32 [INFO] Executing Step 2: CodeCleaning
+2024-09-26 18:43:32 [INFO] 
+Code running:
+```
+result = {}
+dfs[0] = dfs[0].sort_values('Salary', ascending=False)
+highest_salary_row = dfs[0].head(1)
+highest_salary = highest_salary_row['Salary'].values[0]
+result = {'type': 'string', 'value': f'The highest salary is {highest_salary}.'}
+print(result)
+        ```
+2024-09-26 18:43:32 [INFO] Executing Step 7: ResultValidation
+2024-09-26 18:43:32 [INFO] Answer: {'type': 'string', 'value': 'The highest salary is 122391.'}
+2024-09-26 18:43:32 [INFO] Executing Step 8: ResultParsing
+2024-09-26 18:44:34 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-26 18:44:34 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:150x5
+sepal_length,sepal_width,petal_length,petal_width,species
+5.4,4.2,4.5,1.0,Iris-versicolor
+6.8,3.3,3.8,1.7,Iris-setosa
+6.5,3.8,6.0,0.6,Iris-virginica
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ number of rows
+
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2024-09-26 18:44:34 [INFO] Code generated:
+            ```
+            Python
+# TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+dfs = [pd.DataFrame({
+"singular": {"sepal_length": 5.4, "sepal_width": 4.2, "petal_length": 4.5, "petal_width": 1.0, "species": "Iris-versicolor"},
+"plural": {"sepal_length": 6.8, "sepal_width": 3.3, "petal_length": 3.8, "petal_width": 1.7, "species": "Iris-setosa"},
+"more": {"sepal_length": 6.5, "sepal_width": 3.8, "petal_length": 6.0, "petal_width": 0.6, "species": "Iris-virginica"}
+})]
+
+result = {
+"type": "number",
+"value": len(dfs)
+}
+
+print(result)
+            ```
+            
+2024-09-26 18:44:34 [INFO] Executing Step 4: CachePopulation
+2024-09-26 18:44:34 [INFO] Executing Step 5: CodeCleaning
+2024-09-26 18:44:34 [INFO] 
+Code running:
+```
+Python
+result = {'type': 'number', 'value': len(dfs)}
+print(result)
+        ```
+2024-09-26 18:44:34 [INFO] Executing Step 6: CodeExecution
+2024-09-26 18:44:34 [ERROR] Failed with error: Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 1, in <module>
+NameError: name 'Python' is not defined
+
+2024-09-26 18:44:34 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2024-09-26 18:44:34 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2024-09-26 18:44:34 [INFO] Executing Step 0: ErrorPromptGeneration
+2024-09-26 18:44:34 [INFO] Using prompt: <dataframe>
+dfs[0]:150x5
+sepal_length,sepal_width,petal_length,petal_width,species
+5.4,4.2,4.5,1.0,Iris-versicolor
+6.8,3.3,3.8,1.7,Iris-setosa
+6.5,3.8,6.0,0.6,Iris-virginica
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ number of rows
+
+
+You generated this python code:
+Python
+result = {'type': 'number', 'value': len(dfs)}
+print(result)
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 1, in <module>
+NameError: name 'Python' is not defined
+
+
+Fix the python code above and return the new python code:
+2024-09-26 18:44:34 [INFO] Executing Step 1: CodeGenerator
+2024-09-26 18:44:55 [INFO] Question: what is average value of sepal length
+
+2024-09-26 18:44:55 [INFO] Running PandasAI with local LLM...
+2024-09-26 18:44:55 [INFO] Prompt ID: cd680617-c079-40f7-80fe-c5fbdb8c8ac0
+2024-09-26 18:44:55 [INFO] Executing Pipeline: GenerateChatPipeline
+2024-09-26 18:44:55 [INFO] Executing Step 0: ValidatePipelineInput
+2024-09-26 18:44:55 [INFO] Executing Step 1: CacheLookup
+2024-09-26 18:44:55 [INFO] Executing Step 2: PromptGeneration
+2024-09-26 18:44:55 [INFO] Using prompt: <dataframe>
+dfs[0]:150x5
+sepal_length,sepal_width,petal_length,petal_width,species
+6.9,3.8,4.6,0.2,Iris-versicolor
+7.7,4.4,3.6,1.6,Iris-setosa
+6.4,2.3,3.9,1.9,Iris-virginica
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what is average value of sepal length
+
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2024-09-26 18:44:55 [INFO] Executing Step 3: CodeGenerator
+2024-09-26 18:44:55 [INFO] Question: what is average value of sepal length
+
+2024-09-26 18:44:55 [INFO] Running PandasAI with local LLM...
+2024-09-26 18:44:55 [INFO] Prompt ID: 432030ae-3056-4b9f-859b-d0f5f619056a
+2024-09-26 18:44:55 [INFO] Executing Pipeline: GenerateChatPipeline
+2024-09-26 18:44:55 [INFO] Executing Step 0: ValidatePipelineInput
+2024-09-26 18:44:55 [INFO] Executing Step 1: CacheLookup
+2024-09-26 18:44:55 [INFO] Executing Step 2: PromptGeneration
+2024-09-26 18:44:55 [INFO] Using prompt: <dataframe>
+dfs[0]:150x5
+sepal_length,sepal_width,petal_length,petal_width,species
+7.4,3.3,6.6,0.1,Iris-versicolor
+7.7,2.8,1.3,0.2,Iris-virginica
+4.6,2.9,4.2,2.1,Iris-setosa
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what is average value of sepal length
+
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2024-09-26 18:44:55 [INFO] Executing Step 3: CodeGenerator
+2024-09-26 18:45:41 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-26 18:45:41 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:30x2
+YearsExperience,Salary
+4.1,67938
+9.5,57081
+7.1,91738
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ what is the highest salery
+
+
+You generated this python code:
+def get_highest_salary(df):
+    return df['Salary'].max()
+
+
+highest_salary = dfs[0]['Salary'].max()
+result = {'type': 'string', 'value': f'The highest salary is {highest_salary}.'}
+if True:
+    plt.figure(figsize=(8, 6))
+    sns.scatterplot(x='YearsExperience', y='Salary', data=dfs[0])
+    plt.title('Highest Salary Scatter Plot')
+    plt.savefig('D:/N D/MutipleCSVChatllama3Pandasai/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': 'D:/N D/MutipleCSVChatllama3Pandasai/exports/charts/temp_chart.png'}
+print(result)
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 9, in <module>
+NameError: name 'sns' is not defined
+
+
+Fix the python code above and return the new python code:
+            
+2024-09-26 18:45:41 [INFO] Code generated:
+            ```
+            import seaborn as sns
+            ```
+            
+2024-09-26 18:45:41 [INFO] Executing Step 2: CodeCleaning
+2024-09-26 18:45:41 [INFO] 
+Code running:
+```
+
+        ```
+2024-09-26 18:45:41 [ERROR] Failed with error: Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 175, in execute_code
+    raise NoResultFoundError("No result returned")
+pandasai.exceptions.NoResultFoundError: No result returned
+
+2024-09-26 18:45:41 [WARNING] Failed to execute code retrying with a correction framework [retry number: 2]
+2024-09-26 18:45:41 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2024-09-26 18:45:41 [INFO] Executing Step 0: ErrorPromptGeneration
+2024-09-26 18:45:41 [INFO] Using prompt: <dataframe>
+dfs[0]:30x2
+YearsExperience,Salary
+4.1,67938
+9.5,57081
+7.1,91738
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ what is the highest salery
+
+
+You generated this python code:
+
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 175, in execute_code
+    raise NoResultFoundError("No result returned")
+pandasai.exceptions.NoResultFoundError: No result returned
+
+
+Fix the python code above and return the new python code:
+2024-09-26 18:45:41 [INFO] Executing Step 1: CodeGenerator
+2024-09-26 18:46:47 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-26 18:46:47 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:150x5
+sepal_length,sepal_width,petal_length,petal_width,species
+4.5,3.0,6.6,1.7,Iris-setosa
+4.6,3.1,5.7,0.3,Iris-virginica
+7.1,2.7,3.3,1.2,Iris-versicolor
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what is average value of sepal length
+
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2024-09-26 18:46:47 [INFO] Code generated:
+            ```
+            Python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Load data (already given)
+dfs = [pd.DataFrame({
+    'sepal_length': [4.5, 4.6, 7.1],
+    'sepal_width': [3.0, 3.1, 2.7],
+    'petal_length': [6.6, 5.7, 3.3],
+    'petal_width': [1.7, 0.3, 1.2],
+    'species': ['Iris-setosa', 'Iris-virginica', 'Iris-versicolor']
+})]
+
+# Calculate the average value of sepal length
+average_sepal_length = dfs[0]['sepal_length'].mean()
+
+# Declare result variable as dictionary with type and value
+result = {"type": "number", "value": average_sepal_length}
+            ```
+            
+2024-09-26 18:46:47 [INFO] Executing Step 4: CachePopulation
+2024-09-26 18:46:47 [INFO] Executing Step 5: CodeCleaning
+2024-09-26 18:46:47 [INFO] 
+Code running:
+```
+Python
+average_sepal_length = dfs[0]['sepal_length'].mean()
+result = {'type': 'number', 'value': average_sepal_length}
+        ```
+2024-09-26 18:46:47 [INFO] Executing Step 6: CodeExecution
+2024-09-26 18:46:47 [ERROR] Failed with error: Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 1, in <module>
+NameError: name 'Python' is not defined
+
+2024-09-26 18:46:47 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2024-09-26 18:46:47 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2024-09-26 18:46:47 [INFO] Executing Step 0: ErrorPromptGeneration
+2024-09-26 18:46:47 [INFO] Using prompt: <dataframe>
+dfs[0]:150x5
+sepal_length,sepal_width,petal_length,petal_width,species
+4.5,3.0,6.6,1.7,Iris-setosa
+4.6,3.1,5.7,0.3,Iris-virginica
+7.1,2.7,3.3,1.2,Iris-versicolor
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ what is average value of sepal length
+
+
+You generated this python code:
+Python
+average_sepal_length = dfs[0]['sepal_length'].mean()
+result = {'type': 'number', 'value': average_sepal_length}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 1, in <module>
+NameError: name 'Python' is not defined
+
+
+Fix the python code above and return the new python code:
+2024-09-26 18:46:47 [INFO] Executing Step 1: CodeGenerator
+2024-09-26 18:47:07 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-26 18:47:07 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:150x5
+sepal_length,sepal_width,petal_length,petal_width,species
+5.4,4.2,4.5,1.0,Iris-versicolor
+6.8,3.3,3.8,1.7,Iris-setosa
+6.5,3.8,6.0,0.6,Iris-virginica
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ number of rows
+
+
+You generated this python code:
+Python
+result = {'type': 'number', 'value': len(dfs)}
+print(result)
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 1, in <module>
+NameError: name 'Python' is not defined
+
+
+Fix the python code above and return the new python code:
+            
+2024-09-26 18:47:07 [INFO] Code generated:
+            ```
+            result = {'type': 'number', 'value': len(dfs)}
+print(result)
+            ```
+            
+2024-09-26 18:47:07 [INFO] Executing Step 2: CodeCleaning
+2024-09-26 18:47:07 [INFO] 
+Code running:
+```
+result = {'type': 'number', 'value': len(dfs)}
+print(result)
+        ```
+2024-09-26 18:47:07 [INFO] Executing Step 7: ResultValidation
+2024-09-26 18:47:07 [INFO] Answer: {'type': 'number', 'value': 1}
+2024-09-26 18:47:07 [INFO] Executing Step 8: ResultParsing
+2024-09-26 18:50:04 [INFO] Question: what  is the highest salary
+
+2024-09-26 18:50:04 [INFO] Running PandasAI with local LLM...
+2024-09-26 18:50:04 [INFO] Prompt ID: 2beb1b80-025d-4b12-add7-734060a7de8b
+2024-09-26 18:50:04 [INFO] Executing Pipeline: GenerateChatPipeline
+2024-09-26 18:50:04 [INFO] Executing Step 0: ValidatePipelineInput
+2024-09-26 18:50:04 [INFO] Executing Step 1: CacheLookup
+2024-09-26 18:50:04 [INFO] Executing Step 2: PromptGeneration
+2024-09-26 18:50:04 [INFO] Using prompt: <dataframe>
+dfs[0]:30x2
+YearsExperience,Salary
+1.5,66029
+3.0,67938
+2.2,37731
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what  is the highest salary
+
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2024-09-26 18:50:04 [INFO] Executing Step 3: CodeGenerator
+2024-09-26 18:50:53 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-26 18:50:53 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:30x2
+YearsExperience,Salary
+1.5,66029
+3.0,67938
+2.2,37731
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ what  is the highest salary
+
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2024-09-26 18:50:53 [INFO] Code generated:
+            ```
+            import pandas as pd
+
+# List of DataFrames
+dfs = [pd.DataFrame([[1.5, 66029], [3.0, 67938], [2.2, 37731]], columns=['YearsExperience', 'Salary'])]
+
+
+# Find the highest salary
+highest_salary = dfs[0]['Salary'].max()
+
+# Declare result var:
+result = {"type": "string", "value": f"The highest salary is {int(highest_salary)}."}
+
+print(result)
+            ```
+            
+2024-09-26 18:50:53 [INFO] Executing Step 4: CachePopulation
+2024-09-26 18:50:53 [INFO] Executing Step 5: CodeCleaning
+2024-09-26 18:50:53 [INFO] 
+Code running:
+```
+highest_salary = dfs[0]['Salary'].max()
+result = {'type': 'string', 'value': f'The highest salary is {int(highest_salary)}.'}
+print(result)
+        ```
+2024-09-26 18:50:53 [INFO] Executing Step 6: CodeExecution
+2024-09-26 18:50:53 [INFO] Executing Step 7: ResultValidation
+2024-09-26 18:50:53 [INFO] Answer: {'type': 'string', 'value': 'The highest salary is 122391.'}
+2024-09-26 18:50:53 [INFO] Executing Step 8: ResultParsing
+2024-09-26 18:51:44 [INFO] Question: no of retailers from Karnataka
+2024-09-26 18:51:44 [INFO] Running PandasAI with local LLM...
+2024-09-26 18:51:44 [INFO] Prompt ID: a381c688-5fe2-412e-9b06-66c6c928fd72
+2024-09-26 18:51:44 [INFO] Executing Pipeline: GenerateChatPipeline
+2024-09-26 18:51:44 [INFO] Executing Step 0: ValidatePipelineInput
+2024-09-26 18:51:44 [INFO] Executing Step 1: CacheLookup
+2024-09-26 18:51:44 [INFO] Executing Step 2: PromptGeneration
+2024-09-26 18:51:44 [INFO] Using prompt: <dataframe>
+dfs[0]:10x23
+order_line_item_id,source,order_id,ordered_quantity,tax_percent,net_sales_before_tax,gross_merchandise_value,sku_id,first_ordered_at,order_date_time_utc,refund_status,rto_status,cancellation_status,order_status,payment_status,billing_address_state,gift_wrap_expense,packaging_expense,handling_expense,shipping_expense,marketplace_expense,payment_gateway_expense,other_adjustments
+amazon_35207982732202,amazon,amazon_407-8641831-7284313,0,0.18,0.0,0.0,amazon_B0CQM7CT8Z,2024-01-26 15:08:03.000000,2024-01-26 14:59:00.000000,False,False,True,fulfilled,authorized,KARNATAKA,0.0,9.429271,0.0,0.0,104.657135,0.0,0.0
+amazon_35200118728802,amazon,amazon_402-1629699-0281133,1,0.18,846.61017,799.0,amazon_B0CQK7NG2H,2024-01-29 20:43:29.000000,2024-01-27 11:41:00.000000,True,False,False,fulfilled,paid,TAMIL NADU,0.0,7.5415287,0.0,40.682228,0.0,0.0,0.0
+amazon_35224380079762,amazon,amazon_171-6560521-8822745,1,0.18,677.11865,999.0,amazon_B0CQK9T3B6,,2024-04-22 05:34:42.000000,True,True,True,,voided,,0.0,0.0,0.0,32.537636,130.85416,0.0,0.0
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ no of retailers from Karnataka
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2024-09-26 18:51:44 [INFO] Executing Step 3: CodeGenerator
+2024-09-26 18:52:53 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-26 18:52:53 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:10x23
+order_line_item_id,source,order_id,ordered_quantity,tax_percent,net_sales_before_tax,gross_merchandise_value,sku_id,first_ordered_at,order_date_time_utc,refund_status,rto_status,cancellation_status,order_status,payment_status,billing_address_state,gift_wrap_expense,packaging_expense,handling_expense,shipping_expense,marketplace_expense,payment_gateway_expense,other_adjustments
+amazon_35207982732202,amazon,amazon_407-8641831-7284313,0,0.18,0.0,0.0,amazon_B0CQM7CT8Z,2024-01-26 15:08:03.000000,2024-01-26 14:59:00.000000,False,False,True,fulfilled,authorized,KARNATAKA,0.0,9.429271,0.0,0.0,104.657135,0.0,0.0
+amazon_35200118728802,amazon,amazon_402-1629699-0281133,1,0.18,846.61017,799.0,amazon_B0CQK7NG2H,2024-01-29 20:43:29.000000,2024-01-27 11:41:00.000000,True,False,False,fulfilled,paid,TAMIL NADU,0.0,7.5415287,0.0,40.682228,0.0,0.0,0.0
+amazon_35224380079762,amazon,amazon_171-6560521-8822745,1,0.18,677.11865,999.0,amazon_B0CQK9T3B6,,2024-04-22 05:34:42.000000,True,True,True,,voided,,0.0,0.0,0.0,32.537636,130.85416,0.0,0.0
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ no of retailers from Karnataka
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2024-09-26 18:52:53 [INFO] Code generated:
+            ```
+            import pandas as pd
+
+dfs = [...]  # Assuming these dataframes are already filtered based on different retailers
+
+# Initialize count of retailers from Karnataka to zero.
+karnataka_retailers_count = 0
+
+# Iterate over each dataframe in the list.
+for df in dfs:
+    # Get the 'billing_address_state' for each row in the dataframe.
+    states = df['Billing_address_state'].tolist()
+    
+    # Check if any state is from Karnataka. If yes, increment the count.
+    if 'KARNATAKA' in states:
+        karnataka_retailers_count += 1
+
+# Declare the result
+result = {'type': 'number', 'value': karnataka_retailers_count}
+            ```
+            
+2024-09-26 18:52:53 [INFO] Executing Step 4: CachePopulation
+2024-09-26 18:52:53 [INFO] Executing Step 5: CodeCleaning
+2024-09-26 18:52:53 [INFO] 
+Code running:
+```
+karnataka_retailers_count = 0
+for df in dfs:
+    states = df['Billing_address_state'].tolist()
+    if 'KARNATAKA' in states:
+        karnataka_retailers_count += 1
+result = {'type': 'number', 'value': karnataka_retailers_count}
+        ```
+2024-09-26 18:52:53 [INFO] Executing Step 6: CodeExecution
+2024-09-26 18:52:53 [ERROR] Failed with error: Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandas\core\indexes\base.py", line 3805, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\\_libs\\hashtable_class_helper.pxi", line 7081, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\\_libs\\hashtable_class_helper.pxi", line 7089, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'Billing_address_state'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 3, in <module>
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandas\core\frame.py", line 4102, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandas\core\indexes\base.py", line 3812, in get_loc
+    raise KeyError(key) from err
+KeyError: 'Billing_address_state'
+
+2024-09-26 18:52:53 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2024-09-26 18:52:53 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2024-09-26 18:52:53 [INFO] Executing Step 0: ErrorPromptGeneration
+2024-09-26 18:52:53 [INFO] Using prompt: <dataframe>
+dfs[0]:10x23
+order_line_item_id,source,order_id,ordered_quantity,tax_percent,net_sales_before_tax,gross_merchandise_value,sku_id,first_ordered_at,order_date_time_utc,refund_status,rto_status,cancellation_status,order_status,payment_status,billing_address_state,gift_wrap_expense,packaging_expense,handling_expense,shipping_expense,marketplace_expense,payment_gateway_expense,other_adjustments
+amazon_35207982732202,amazon,amazon_407-8641831-7284313,0,0.18,0.0,0.0,amazon_B0CQM7CT8Z,2024-01-26 15:08:03.000000,2024-01-26 14:59:00.000000,False,False,True,fulfilled,authorized,KARNATAKA,0.0,9.429271,0.0,0.0,104.657135,0.0,0.0
+amazon_35200118728802,amazon,amazon_402-1629699-0281133,1,0.18,846.61017,799.0,amazon_B0CQK7NG2H,2024-01-29 20:43:29.000000,2024-01-27 11:41:00.000000,True,False,False,fulfilled,paid,TAMIL NADU,0.0,7.5415287,0.0,40.682228,0.0,0.0,0.0
+amazon_35224380079762,amazon,amazon_171-6560521-8822745,1,0.18,677.11865,999.0,amazon_B0CQK9T3B6,,2024-04-22 05:34:42.000000,True,True,True,,voided,,0.0,0.0,0.0,32.537636,130.85416,0.0,0.0
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ no of retailers from Karnataka
+
+You generated this python code:
+karnataka_retailers_count = 0
+for df in dfs:
+    states = df['Billing_address_state'].tolist()
+    if 'KARNATAKA' in states:
+        karnataka_retailers_count += 1
+result = {'type': 'number', 'value': karnataka_retailers_count}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandas\core\indexes\base.py", line 3805, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\\_libs\\hashtable_class_helper.pxi", line 7081, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\\_libs\\hashtable_class_helper.pxi", line 7089, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'Billing_address_state'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 3, in <module>
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandas\core\frame.py", line 4102, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandas\core\indexes\base.py", line 3812, in get_loc
+    raise KeyError(key) from err
+KeyError: 'Billing_address_state'
+
+
+Fix the python code above and return the new python code:
+2024-09-26 18:52:53 [INFO] Executing Step 1: CodeGenerator
+2024-09-26 18:53:05 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-26 18:53:05 [ERROR] Pipeline failed on step 1: No code found in the response
+2024-09-26 18:53:05 [ERROR] Pipeline failed on step 6: No code found in the response
+2024-09-26 18:54:21 [INFO] Question: No of orders in January
+2024-09-26 18:54:21 [INFO] Running PandasAI with local LLM...
+2024-09-26 18:54:21 [INFO] Prompt ID: 754a6e74-53cb-4d90-96fb-d96c6ae0a878
+2024-09-26 18:54:21 [INFO] Executing Pipeline: GenerateChatPipeline
+2024-09-26 18:54:21 [INFO] Executing Step 0: ValidatePipelineInput
+2024-09-26 18:54:21 [INFO] Executing Step 1: CacheLookup
+2024-09-26 18:54:21 [INFO] Executing Step 2: PromptGeneration
+2024-09-26 18:54:21 [INFO] Using prompt: <dataframe>
+dfs[0]:10x23
+order_line_item_id,source,order_id,ordered_quantity,tax_percent,net_sales_before_tax,gross_merchandise_value,sku_id,first_ordered_at,order_date_time_utc,refund_status,rto_status,cancellation_status,order_status,payment_status,billing_address_state,gift_wrap_expense,packaging_expense,handling_expense,shipping_expense,marketplace_expense,payment_gateway_expense,other_adjustments
+amazon_35264358696562,amazon,amazon_407-0489731-0011545,1,0.18,677.11865,999.0,amazon_B0CQK9T3B6,2024-01-26 15:08:03.000000,2024-01-26 09:08:25.000000,False,False,True,,authorized,,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+amazon_0,amazon,amazon_402-1629699-0281133,0,0.18,0.0,0.0,amazon_B0CTMQ4YY7,2024-01-26 20:29:00.000000,2024-01-29 15:13:29.000000,True,True,False,fulfilled,voided,TAMIL NADU,0.0,7.5415287,0.0,32.537636,130.85416,0.0,0.0
+amazon_35263294843522,amazon,amazon_171-0277077-3545114,1,0.18,846.61017,799.0,amazon_B0CQM7CT8Z,,2024-01-26 14:59:00.000000,False,True,False,fulfilled,paid,KARNATAKA,0.0,9.429271,0.0,40.682228,104.657135,0.0,0.0
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ No of orders in January
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2024-09-26 18:54:21 [INFO] Executing Step 3: CodeGenerator
+2024-09-26 18:55:34 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-26 18:55:34 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:10x23
+order_line_item_id,source,order_id,ordered_quantity,tax_percent,net_sales_before_tax,gross_merchandise_value,sku_id,first_ordered_at,order_date_time_utc,refund_status,rto_status,cancellation_status,order_status,payment_status,billing_address_state,gift_wrap_expense,packaging_expense,handling_expense,shipping_expense,marketplace_expense,payment_gateway_expense,other_adjustments
+amazon_35264358696562,amazon,amazon_407-0489731-0011545,1,0.18,677.11865,999.0,amazon_B0CQK9T3B6,2024-01-26 15:08:03.000000,2024-01-26 09:08:25.000000,False,False,True,,authorized,,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+amazon_0,amazon,amazon_402-1629699-0281133,0,0.18,0.0,0.0,amazon_B0CTMQ4YY7,2024-01-26 20:29:00.000000,2024-01-29 15:13:29.000000,True,True,False,fulfilled,voided,TAMIL NADU,0.0,7.5415287,0.0,32.537636,130.85416,0.0,0.0
+amazon_35263294843522,amazon,amazon_171-0277077-3545114,1,0.18,846.61017,799.0,amazon_B0CQM7CT8Z,,2024-01-26 14:59:00.000000,False,True,False,fulfilled,paid,KARNATAKA,0.0,9.429271,0.0,40.682228,104.657135,0.0,0.0
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ No of orders in January
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2024-09-26 18:55:34 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+from datetime import datetime
+
+# Write code here
+dfs = [...]  # provided dataframe list
+
+# Create a new DataFrame to hold January orders
+january_orders_df = pd.DataFrame(columns=dfs[0].columns)
+
+for df in dfs:
+    january_date_start = datetime(year=2024, month=1, day=1)
+    january_date_end = datetime(year=2024, month=1, day=31)
+    
+    if (df['order_date_time_utc'].min() >= january_date_start) and (df['order_date_time_utc'].max() <= january_date_end):
+        january_orders_df = pd.concat([january_orders_df, df])
+
+# Count the number of orders in January
+num_jan_orders = len(january_orders_df)
+
+# Declare result var:
+result = { "type": "string", "value": f"There were {num_jan_orders} orders in January." }
+            ```
+            
+2024-09-26 18:55:34 [INFO] Executing Step 4: CachePopulation
+2024-09-26 18:55:34 [INFO] Executing Step 5: CodeCleaning
+2024-09-26 18:55:34 [INFO] 
+Code running:
+```
+january_orders_df = pd.DataFrame(columns=dfs[0].columns)
+for df in dfs:
+    january_date_start = datetime(year=2024, month=1, day=1)
+    january_date_end = datetime(year=2024, month=1, day=31)
+    if df['order_date_time_utc'].min() >= january_date_start and df['order_date_time_utc'].max() <= january_date_end:
+        january_orders_df = pd.concat([january_orders_df, df])
+num_jan_orders = len(january_orders_df)
+result = {'type': 'string', 'value': f'There were {num_jan_orders} orders in January.'}
+        ```
+2024-09-26 18:55:34 [INFO] Executing Step 6: CodeExecution
+2024-09-26 18:55:34 [ERROR] Failed with error: Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 5, in <module>
+TypeError: '>=' not supported between instances of 'str' and 'datetime.datetime'
+
+2024-09-26 18:55:34 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2024-09-26 18:55:34 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2024-09-26 18:55:34 [INFO] Executing Step 0: ErrorPromptGeneration
+2024-09-26 18:55:34 [INFO] Using prompt: <dataframe>
+dfs[0]:10x23
+order_line_item_id,source,order_id,ordered_quantity,tax_percent,net_sales_before_tax,gross_merchandise_value,sku_id,first_ordered_at,order_date_time_utc,refund_status,rto_status,cancellation_status,order_status,payment_status,billing_address_state,gift_wrap_expense,packaging_expense,handling_expense,shipping_expense,marketplace_expense,payment_gateway_expense,other_adjustments
+amazon_35264358696562,amazon,amazon_407-0489731-0011545,1,0.18,677.11865,999.0,amazon_B0CQK9T3B6,2024-01-26 15:08:03.000000,2024-01-26 09:08:25.000000,False,False,True,,authorized,,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+amazon_0,amazon,amazon_402-1629699-0281133,0,0.18,0.0,0.0,amazon_B0CTMQ4YY7,2024-01-26 20:29:00.000000,2024-01-29 15:13:29.000000,True,True,False,fulfilled,voided,TAMIL NADU,0.0,7.5415287,0.0,32.537636,130.85416,0.0,0.0
+amazon_35263294843522,amazon,amazon_171-0277077-3545114,1,0.18,846.61017,799.0,amazon_B0CQM7CT8Z,,2024-01-26 14:59:00.000000,False,True,False,fulfilled,paid,KARNATAKA,0.0,9.429271,0.0,40.682228,104.657135,0.0,0.0
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ No of orders in January
+
+You generated this python code:
+january_orders_df = pd.DataFrame(columns=dfs[0].columns)
+for df in dfs:
+    january_date_start = datetime(year=2024, month=1, day=1)
+    january_date_end = datetime(year=2024, month=1, day=31)
+    if df['order_date_time_utc'].min() >= january_date_start and df['order_date_time_utc'].max() <= january_date_end:
+        january_orders_df = pd.concat([january_orders_df, df])
+num_jan_orders = len(january_orders_df)
+result = {'type': 'string', 'value': f'There were {num_jan_orders} orders in January.'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 5, in <module>
+TypeError: '>=' not supported between instances of 'str' and 'datetime.datetime'
+
+
+Fix the python code above and return the new python code:
+2024-09-26 18:55:34 [INFO] Executing Step 1: CodeGenerator
+2024-09-26 18:57:05 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-26 18:57:05 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:10x23
+order_line_item_id,source,order_id,ordered_quantity,tax_percent,net_sales_before_tax,gross_merchandise_value,sku_id,first_ordered_at,order_date_time_utc,refund_status,rto_status,cancellation_status,order_status,payment_status,billing_address_state,gift_wrap_expense,packaging_expense,handling_expense,shipping_expense,marketplace_expense,payment_gateway_expense,other_adjustments
+amazon_35264358696562,amazon,amazon_407-0489731-0011545,1,0.18,677.11865,999.0,amazon_B0CQK9T3B6,2024-01-26 15:08:03.000000,2024-01-26 09:08:25.000000,False,False,True,,authorized,,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+amazon_0,amazon,amazon_402-1629699-0281133,0,0.18,0.0,0.0,amazon_B0CTMQ4YY7,2024-01-26 20:29:00.000000,2024-01-29 15:13:29.000000,True,True,False,fulfilled,voided,TAMIL NADU,0.0,7.5415287,0.0,32.537636,130.85416,0.0,0.0
+amazon_35263294843522,amazon,amazon_171-0277077-3545114,1,0.18,846.61017,799.0,amazon_B0CQM7CT8Z,,2024-01-26 14:59:00.000000,False,True,False,fulfilled,paid,KARNATAKA,0.0,9.429271,0.0,40.682228,104.657135,0.0,0.0
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ No of orders in January
+
+You generated this python code:
+january_orders_df = pd.DataFrame(columns=dfs[0].columns)
+for df in dfs:
+    january_date_start = datetime(year=2024, month=1, day=1)
+    january_date_end = datetime(year=2024, month=1, day=31)
+    if df['order_date_time_utc'].min() >= january_date_start and df['order_date_time_utc'].max() <= january_date_end:
+        january_orders_df = pd.concat([january_orders_df, df])
+num_jan_orders = len(january_orders_df)
+result = {'type': 'string', 'value': f'There were {num_jan_orders} orders in January.'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 5, in <module>
+TypeError: '>=' not supported between instances of 'str' and 'datetime.datetime'
+
+
+Fix the python code above and return the new python code:
+            
+2024-09-26 18:57:05 [INFO] Code generated:
+            ```
+            import pandas as pd
+from datetime import datetime
+
+january_orders_df = pd.DataFrame(columns=dfs[0].columns)
+for df in dfs:
+    january_date_start = datetime(year=2024, month=1, day=1)
+    january_date_end = datetime(year=2024, month=1, day=31)
+    if (df['order_date_time_utc'].dtype == 'object'): 
+        # Convert order_date_time_utc column to datetime format
+        df['order_date_time utc'] = pd.to_datetime(df['order_date_time_utc'])
+    
+    if df['order_date_time_utc'].min() >= january_date_start and df['order_date_time_utc'].max() <= january_date_end:
+        january_orders_df = pd.concat([january_orders_df, df])
+
+num_jan_orders = len(january_orders_df)
+result = {'type': 'string', 'value': f'There were {num_jan_orders} orders in January.'}
+            ```
+            
+2024-09-26 18:57:05 [INFO] Executing Step 2: CodeCleaning
+2024-09-26 18:57:05 [INFO] 
+Code running:
+```
+january_orders_df = pd.DataFrame(columns=dfs[0].columns)
+for df in dfs:
+    january_date_start = datetime(year=2024, month=1, day=1)
+    january_date_end = datetime(year=2024, month=1, day=31)
+    if df['order_date_time_utc'].dtype == 'object':
+        df['order_date_time utc'] = pd.to_datetime(df['order_date_time_utc'])
+    if df['order_date_time_utc'].min() >= january_date_start and df['order_date_time_utc'].max() <= january_date_end:
+        january_orders_df = pd.concat([january_orders_df, df])
+num_jan_orders = len(january_orders_df)
+result = {'type': 'string', 'value': f'There were {num_jan_orders} orders in January.'}
+        ```
+2024-09-26 18:57:05 [ERROR] Failed with error: Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 7, in <module>
+TypeError: '>=' not supported between instances of 'str' and 'datetime.datetime'
+
+2024-09-26 18:57:05 [WARNING] Failed to execute code retrying with a correction framework [retry number: 2]
+2024-09-26 18:57:05 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2024-09-26 18:57:05 [INFO] Executing Step 0: ErrorPromptGeneration
+2024-09-26 18:57:05 [INFO] Using prompt: <dataframe>
+dfs[0]:10x23
+order_line_item_id,source,order_id,ordered_quantity,tax_percent,net_sales_before_tax,gross_merchandise_value,sku_id,first_ordered_at,order_date_time_utc,refund_status,rto_status,cancellation_status,order_status,payment_status,billing_address_state,gift_wrap_expense,packaging_expense,handling_expense,shipping_expense,marketplace_expense,payment_gateway_expense,other_adjustments
+amazon_35264358696562,amazon,amazon_407-0489731-0011545,1,0.18,677.11865,999.0,amazon_B0CQK9T3B6,2024-01-26 15:08:03.000000,2024-01-26 09:08:25.000000,False,False,True,,authorized,,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+amazon_0,amazon,amazon_402-1629699-0281133,0,0.18,0.0,0.0,amazon_B0CTMQ4YY7,2024-01-26 20:29:00.000000,2024-01-29 15:13:29.000000,True,True,False,fulfilled,voided,TAMIL NADU,0.0,7.5415287,0.0,32.537636,130.85416,0.0,0.0
+amazon_35263294843522,amazon,amazon_171-0277077-3545114,1,0.18,846.61017,799.0,amazon_B0CQM7CT8Z,,2024-01-26 14:59:00.000000,False,True,False,fulfilled,paid,KARNATAKA,0.0,9.429271,0.0,40.682228,104.657135,0.0,0.0
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ No of orders in January
+
+You generated this python code:
+january_orders_df = pd.DataFrame(columns=dfs[0].columns)
+for df in dfs:
+    january_date_start = datetime(year=2024, month=1, day=1)
+    january_date_end = datetime(year=2024, month=1, day=31)
+    if df['order_date_time_utc'].dtype == 'object':
+        df['order_date_time utc'] = pd.to_datetime(df['order_date_time_utc'])
+    if df['order_date_time_utc'].min() >= january_date_start and df['order_date_time_utc'].max() <= january_date_end:
+        january_orders_df = pd.concat([january_orders_df, df])
+num_jan_orders = len(january_orders_df)
+result = {'type': 'string', 'value': f'There were {num_jan_orders} orders in January.'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 7, in <module>
+TypeError: '>=' not supported between instances of 'str' and 'datetime.datetime'
+
+
+Fix the python code above and return the new python code:
+2024-09-26 18:57:05 [INFO] Executing Step 1: CodeGenerator
+2024-09-26 18:58:36 [INFO] HTTP Request: POST http://localhost:11434/v1/chat/completions "HTTP/1.1 200 OK"
+2024-09-26 18:58:36 [INFO] Prompt used:
+            <dataframe>
+dfs[0]:10x23
+order_line_item_id,source,order_id,ordered_quantity,tax_percent,net_sales_before_tax,gross_merchandise_value,sku_id,first_ordered_at,order_date_time_utc,refund_status,rto_status,cancellation_status,order_status,payment_status,billing_address_state,gift_wrap_expense,packaging_expense,handling_expense,shipping_expense,marketplace_expense,payment_gateway_expense,other_adjustments
+amazon_35264358696562,amazon,amazon_407-0489731-0011545,1,0.18,677.11865,999.0,amazon_B0CQK9T3B6,2024-01-26 15:08:03.000000,2024-01-26 09:08:25.000000,False,False,True,,authorized,,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+amazon_0,amazon,amazon_402-1629699-0281133,0,0.18,0.0,0.0,amazon_B0CTMQ4YY7,2024-01-26 20:29:00.000000,2024-01-29 15:13:29.000000,True,True,False,fulfilled,voided,TAMIL NADU,0.0,7.5415287,0.0,32.537636,130.85416,0.0,0.0
+amazon_35263294843522,amazon,amazon_171-0277077-3545114,1,0.18,846.61017,799.0,amazon_B0CQM7CT8Z,,2024-01-26 14:59:00.000000,False,True,False,fulfilled,paid,KARNATAKA,0.0,9.429271,0.0,40.682228,104.657135,0.0,0.0
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ No of orders in January
+
+You generated this python code:
+january_orders_df = pd.DataFrame(columns=dfs[0].columns)
+for df in dfs:
+    january_date_start = datetime(year=2024, month=1, day=1)
+    january_date_end = datetime(year=2024, month=1, day=31)
+    if df['order_date_time_utc'].dtype == 'object':
+        df['order_date_time utc'] = pd.to_datetime(df['order_date_time_utc'])
+    if df['order_date_time_utc'].min() >= january_date_start and df['order_date_time_utc'].max() <= january_date_end:
+        january_orders_df = pd.concat([january_orders_df, df])
+num_jan_orders = len(january_orders_df)
+result = {'type': 'string', 'value': f'There were {num_jan_orders} orders in January.'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\N D\MutipleCSVChatllama3Pandasai\venv\Lib\site-packages\pandasai\pipelines\chat\code_execution.py", line 171, in execute_code
+    exec(code, environment)
+  File "<string>", line 7, in <module>
+TypeError: '>=' not supported between instances of 'str' and 'datetime.datetime'
+
+
+Fix the python code above and return the new python code:
+            
+2024-09-26 18:58:36 [INFO] Code generated:
+            ```
+            Python
+january_orders_df = pd.DataFrame(columns=dfs[0].columns)
+for df in dfs:
+    january_date_start = datetime(year=2024, month=1, day=1).replace(tzinfo=None)  # Make date timezone-naive for comparison
+    january_date_end = datetime(year=2024, month=1, day=31).replace(tzinfo=None)
+    
+    if df['order_date_time_utc'].dtype == 'object':
+        df['order_date_time_utc'] = pd.to_datetime(df['order_date_time_utc'])
+    
+    january_orders_df = df[(df['order_date_time_utc'].dt.date >= datetime(year=2024, month=1, day=1).date()) & (df['order_date_time_utc'].dt.date <= datetime(year=2024, month=1, day=31).date())]
+num_jan_orders = len(january_orders_df)
+result = {'type': 'string', 'value': f'There were {num_jan_orders} orders in January.'}
+            ```
+            
+2024-09-26 18:58:36 [INFO] Executing Step 2: CodeCleaning
+2024-09-26 18:58:36 [ERROR] Pipeline failed on step 2: name 'Python' is not defined
+2024-09-26 18:58:36 [ERROR] Pipeline failed on step 6: name 'Python' is not defined
