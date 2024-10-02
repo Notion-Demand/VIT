@@ -1,0 +1,11 @@
+.chart-container {
+  width: 100%;
+  max-width: 800px; /* Keep the max-width at 1200px */
+  margin: 22px;
+  padding: 20px;
+}
+
+.chart-wrapper {
+  position: relative;
+  height: 500px; /* Adjust height */
+}
