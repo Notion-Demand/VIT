@@ -7,7 +7,8 @@ function App() {
   const [targetColumn, setTargetColumn] = useState('');
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState(null);
-  const [data, setData] = useState([]);
+  const [dataRows, setDataRows] = useState([]);
+  const [error, setError] = useState('');
 
   // Handle file input
   const handleFileChange = (event) => {
@@ -17,9 +18,10 @@ function App() {
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+    setError(''); // Reset error state
+
     if (!file || !targetColumn) {
-      alert("Please upload a file and specify the target column.");
+      setError("Please upload a file and specify the target column.");
       return;
     }
 
@@ -36,14 +38,19 @@ function App() {
         },
       });
 
-      setResults(response.data);
-      setData(response.data.data); // Set the dataset for rendering
-
+      if (response.data) {
+        setResults(response.data);
+        alert(`Fraud count detected: ${response.data.fraud_count}`);
+        setDataRows(response.data.preview_data);
+      } else {
+        console.error("No data returned from the server");
+      }
     } catch (error) {
-      console.error("There was an error with the request:", error);
+      console.error("There was an error with the request:", error.response?.data || error.message);
+      setError("Error: " + (error.response?.data?.error || error.message));
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -63,6 +70,7 @@ function App() {
             placeholder="Enter target column name"
           />
         </div>
+        {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
         <div>
           <button type="submit" disabled={loading}>
             {loading ? "Processing..." : "Submit"}
@@ -73,30 +81,34 @@ function App() {
       {results && (
         <div className="results">
           <h2>Results:</h2>
-          <p><strong>Accuracy: </strong> {results.accuracy}</p>
+          <p><strong>Accuracy: </strong>{results.accuracy}</p>
           <p><strong>Precision: </strong>{results.precision}</p>
           <p><strong>F1 Score: </strong>{results.f1_score}</p>
           <p><strong>ROC AUC Score: </strong>{results.roc_auc_score}</p>
-
-          <h3>Top 30 Rows:</h3>
-          <table className="data-table">
-            <thead>
-              <tr>
-                {data.length > 0 && Object.keys(data[0]).map((key) => (
-                  <th key={key}>{key}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((row, index) => (
-                <tr key={index} style={{ backgroundColor: row.Predicted_Fraud === 1 ? 'red' : 'white' }}>
-                  {Object.values(row).map((val, i) => (
-                    <td key={i}>{val}</td>
+          <p><strong>Fraud Count: </strong>{results.fraud_count}</p>
+          
+          <h3>Preview of First 30 Rows:</h3>
+          {dataRows.length > 0 && (
+            <table>
+              <thead>
+                <tr>
+                  {Object.keys(dataRows[0]).map((key) => (
+                    <th key={key}>{key}</th>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+  {dataRows.map((row, index) => (
+    <tr key={index} className={row.Fraud_Detected ? 'fraud-row' : ''}>
+      {Object.values(row).map((value, i) => (
+        <td key={i}>{value}</td>
+      ))}
+    </tr>
+  ))}
+</tbody>
+
+            </table>
+          )}
         </div>
       )}
     </div>

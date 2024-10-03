@@ -6,6 +6,9 @@ from sklearn.model_selection import train_test_split, RandomizedSearchCV
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.metrics import accuracy_score, precision_score, f1_score, roc_auc_score
 from imblearn.over_sampling import SMOTE
+import traceback
+import numpy as np
+
 
 app = Flask(__name__)
 CORS(app)
@@ -21,6 +24,10 @@ def fraud_detection():
     try:
         # Load the dataset
         df = pd.read_csv(file)
+        
+        # Ensure the target column exists in the DataFrame
+        if target_column not in df.columns:
+            return jsonify({'error': f'Target column "{target_column}" not found in the dataset'}), 400
 
         # Preprocess
         X = df.drop(target_column, axis=1)
@@ -66,27 +73,43 @@ def fraud_detection():
 
         # Predict
         y_pred = best_model.predict(X_test)
+        y_pred_proba = best_model.predict_proba(X_test)[:, 1]
 
-        # Combine X_test with predictions to show the predicted fraud
-        result_df = pd.DataFrame(X_test, columns=X.columns)
-        result_df['Predicted_Fraud'] = y_pred  # Include predictions from the model
+        # Calculate metrics
+        accuracy = accuracy_score(y_test, y_pred)
+        precision = precision_score(y_test, y_pred, average='binary')
+        f1 = f1_score(y_test, y_pred, average='binary')
+        roc_auc = roc_auc_score(y_test, y_pred_proba)
 
-        # Map predictions to the original DataFrame
-        # Optionally, drop the actual fraud column if present
-        result_df['Actual_Fraud'] = y_test.values  # Optional: to keep actual fraud for reference
+        # Add predictions to the original dataframe
+        df['Fraud_Detected'] = best_model.predict(scaler.transform(X))
+
+        # Count of frauds detected
+        fraud_count = df['Fraud_Detected'].sum()
+
+        # Get first 30 rows
+        preview_data = df.head(30).to_dict(orient='records')
+
+        # Convert all values to standard Python types
+        response = {
+            "accuracy": accuracy,
+            "precision": precision,
+            "f1_score": f1,
+            "roc_auc_score": roc_auc,
+            "fraud_count": fraud_count,
+            "preview_data": preview_data
+        }
+
+        # Convert numpy types to standard Python types for JSON serialization
+        for key in response:
+            if isinstance(response[key], (np.int64, np.float64)):
+                response[key] = float(response[key]) if isinstance(response[key], np.float64) else int(response[key])
         
-        # Format result_df to match the original structure (excluding the original fraud column)
-        result_df = df.loc[X_test.index].copy()  # Get the original rows corresponding to X_test
-        result_df['Predicted_Fraud'] = y_pred  # Add the predictions to the original structure
-
-        # Return metrics and first 30 rows of the modified result_df
-        return jsonify({
-            "data": result_df.head(30).to_dict(orient="records")
-        })
+        return jsonify(response)
     
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
+        print(traceback.format_exc())  # Print stack trace to console
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
