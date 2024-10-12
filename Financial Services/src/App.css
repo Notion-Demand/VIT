@@ -1,109 +1,49 @@
-body {
-  text-align: center;
+body{
   background-color: black;
   color: white;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
 }
 
-.form {
-  background-color: #222;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  width: 50%;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-input[type="file"],
-input[type="text"] {
-  padding: 10px;
-  font-size: 16px;
-  margin-top: 5px;
-  width: 100%;
-  background-color: #444;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-input[type="file"]::file-selector-button {
-  background-color: green;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  cursor: pointer;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 18px;
-  color: white;
-  background-color: green;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:disabled {
-  background-color: grey;
-}
-
-.error {
-  color: red;
-  margin: 10px 0;
-}
-
-.result {
-  margin-top: 20px;
-}
-
-.result h2 {
-  margin-bottom: 10px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  background-color: #333;
-  color: white;
-}
-
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-th {
-  background-color: #070707;
-  color: white;
-}
-
-tr.fraud-row {
-  background-color: red; /* Fraud rows highlighted in red */
-  color: white; /* Fraud row text color */
-}
-
-tr:nth-child(even):not(.fraud-row) {
-  background-color: #444;
-  color: white; /* Regular row text color */
-}
-
-tr:nth-child(odd):not(.fraud-row) {
-  background-color: #555;
-  color: white; /* Regular row text color */
-}
-
-table td, table th {
-  padding: 10px;
-}
+.App {
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 20px;
+  }
+  
+  .upload-section {
+    margin-bottom: 20px;
+  }
+  
+  .result-section {
+    margin-top: 20px;
+  }
+  
+  button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  
+  table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    color: white;
+    background-color: black;
+  }
+  
+  table, th, td {
+    border: 1px solid white;
+  }
+  
+  th, td {
+    padding: 10px;
+  }
+  
+  .error {
+    color: red;
+  }
+  

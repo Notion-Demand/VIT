@@ -1,115 +1,125 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask import Flask, request, jsonify, send_file
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split, RandomizedSearchCV
-from sklearn.preprocessing import StandardScaler, LabelEncoder
-from sklearn.metrics import accuracy_score, precision_score, f1_score, roc_auc_score
-from imblearn.over_sampling import SMOTE
-import traceback
 import numpy as np
-
+from sklearn.ensemble import IsolationForest
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.impute import SimpleImputer
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+import os
+import traceback
+from flask_cors import CORS
+from flask import after_this_request
+from sklearn.model_selection import RandomizedSearchCV
 
 app = Flask(__name__)
 CORS(app)
 
+# Route for fraud detection
 @app.route('/fraud-detection', methods=['POST'])
 def fraud_detection():
-    if 'file' not in request.files or 'target_column' not in request.form:
-        return jsonify({"error": "File or target column missing"}), 400
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file provided'}), 400
 
     file = request.files['file']
-    target_column = request.form['target_column']
-    
-    try:
-        # Load the dataset
-        df = pd.read_csv(file)
-        
-        # Ensure the target column exists in the DataFrame
-        if target_column not in df.columns:
-            return jsonify({'error': f'Target column "{target_column}" not found in the dataset'}), 400
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
 
-        # Preprocess
-        X = df.drop(target_column, axis=1)
-        y = df[target_column]
-        
-        # Identify categorical columns
-        categorical_columns = X.select_dtypes(include=['object']).columns
-        
-        # Apply label encoding to categorical columns
-        for col in categorical_columns:
-            le = LabelEncoder()
-            X[col] = le.fit_transform(X[col].astype(str))
-        
-        # Feature Scaling
-        scaler = StandardScaler()
-        X_scaled = scaler.fit_transform(X)
+    # Load the CSV file into a pandas DataFrame
+    df = pd.read_csv(file)
+    dfc = df.copy()
 
-        # Handle imbalanced classes
-        smote = SMOTE(random_state=42)
-        X_resampled, y_resampled = smote.fit_resample(X_scaled, y)
+    # Handle missing values using SimpleImputer
+    imputer = SimpleImputer(strategy='mean')
+    df[df.select_dtypes(include=['float64', 'int64']).columns] = imputer.fit_transform(
+        df.select_dtypes(include=['float64', 'int64'])
+    )
 
-        # Split the data
-        X_train, X_test, y_train, y_test = train_test_split(X_resampled, y_resampled, test_size=0.2, random_state=42)
+    # Identify categorical columns and apply label encoding
+    categorical_columns = df.select_dtypes(include=['object']).columns
+    for col in categorical_columns:
+        le = LabelEncoder()
+        df[col] = le.fit_transform(df[col].astype(str))
 
-        # Hyperparameter tuning with RandomizedSearchCV
-        param_dist = {
-            'n_estimators': [100, 200, 300],
-            'max_features': ['sqrt', 'log2'],
-            'max_depth': [None, 10, 20, 30, 40],
-            'min_samples_split': [2, 5, 10],
-            'min_samples_leaf': [1, 2, 4],
-            'bootstrap': [True, False],
-            'class_weight': ['balanced', None]
-        }
-        
-        model = RandomForestClassifier(random_state=42)
-        random_search = RandomizedSearchCV(estimator=model, param_distributions=param_dist,
-                                           n_iter=100, cv=5, verbose=2, random_state=42, n_jobs=2)
-        random_search.fit(X_train, y_train)
+    # Standardize numerical features
+    numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns
+    scaler = StandardScaler()
+    df[numeric_cols] = scaler.fit_transform(df[numeric_cols])
 
-        # Best model
-        best_model = random_search.best_estimator_
+    # Isolation Forest for anomaly detection
+    model = IsolationForest(n_estimators=400, contamination=0.06, random_state=42, max_samples='auto')
 
-        # Predict
-        y_pred = best_model.predict(X_test)
-        y_pred_proba = best_model.predict_proba(X_test)[:, 1]
+    # Fit the model and make predictions
+    model.fit(df)
 
-        # Calculate metrics
-        accuracy = accuracy_score(y_test, y_pred)
-        precision = precision_score(y_test, y_pred, average='binary')
-        f1 = f1_score(y_test, y_pred, average='binary')
-        roc_auc = roc_auc_score(y_test, y_pred_proba)
+    # Convert DataFrame to NumPy array for decision_function
+    df_values = df.values
+    df['anomaly_score'] = model.decision_function(df_values)
 
-        # Add predictions to the original dataframe
-        df['Fraud_Detected'] = best_model.predict(scaler.transform(X))
+    df['predicted_fraud'] = model.fit_predict(df_values)
 
-        # Count of frauds detected
-        fraud_count = df['Fraud_Detected'].sum()
+    # Map predictions to 1 for fraud (-1 from the model) and 0 for non-fraud (1 from the model)
+    df['predicted_fraud'] = df['predicted_fraud'].map({1: 0, -1: 1})
 
-        # Get first 30 rows
-        preview_data = df.head(30).to_dict(orient='records')
+    # Normalize the decision function values to represent probabilities (0 to 1)
+    df['fraud_probability'] = (df['anomaly_score'] - df['anomaly_score'].min()) / (
+            df['anomaly_score'].max() - df['anomaly_score'].min())
 
-        # Convert all values to standard Python types
-        response = {
-            "accuracy": accuracy,
-            "precision": precision,
-            "f1_score": f1,
-            "roc_auc_score": roc_auc,
-            "fraud_count": fraud_count,
-            "preview_data": preview_data
-        }
+    dfc['predicted_fraud'] = df['predicted_fraud']
+    dfc['fraud_probability'] = df['fraud_probability']
 
-        # Convert numpy types to standard Python types for JSON serialization
-        for key in response:
-            if isinstance(response[key], (np.int64, np.float64)):
-                response[key] = float(response[key]) if isinstance(response[key], np.float64) else int(response[key])
-        
-        return jsonify(response)
-    
-    except Exception as e:
-        print(traceback.format_exc())  # Print stack trace to console
-        return jsonify({'error': str(e)}), 500
+    # Get the count of fraud cases detected
+    fraud_count = dfc['predicted_fraud'].sum()
+
+    # If 'FraudFound_P' is present, calculate evaluation metrics
+    if 'FraudFound_P' in dfc.columns:
+        actual = dfc['FraudFound_P'].values
+        predicted = dfc['predicted_fraud'].values
+        try:
+            accuracy = accuracy_score(actual, predicted)
+            precision = precision_score(actual, predicted)
+            recall = recall_score(actual, predicted)
+            f1 = f1_score(actual, predicted)
+            roc_auc = roc_auc_score(actual, predicted)
+        except ValueError as e:
+            return jsonify({'error': f'Error calculating metrics: {e}'}), 500
+    else:
+        accuracy = precision = recall = f1 = roc_auc = None
+
+    # Save the result to a CSV file
+    result_filename = 'fraud_detection_result.csv'
+    dfc.to_csv(result_filename, index=False)
+
+    return jsonify({
+        'fraud_count': int(fraud_count),
+        'metrics': {
+            'accuracy': accuracy,
+            'precision': precision,
+            'recall': recall,
+            'f1_score': f1,
+            'roc_auc': roc_auc
+        },
+        'preview': dfc.head(10).to_dict(orient='records'),
+        'result_file': result_filename
+    })
+
+# Route for downloading the result file
+@app.route('/download', methods=['GET'])
+def download_file():
+    file_path = 'fraud_detection_result.csv'
+
+    if os.path.exists(file_path):
+        @after_this_request
+        def remove_file(response):
+            try:
+                os.remove(file_path)
+            except Exception as e:
+                print(f"Error deleting file: {e}")
+            return response
+
+        return send_file(file_path, as_attachment=True)
+    else:
+        return jsonify({"error": "File not found"}), 404
+
 
 if __name__ == '__main__':
     app.run(debug=True)

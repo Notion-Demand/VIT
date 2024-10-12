@@ -4,12 +4,12 @@ import axios from 'axios';
 
 function App() {
   const [file, setFile] = useState(null);
-  const [targetColumn, setTargetColumn] = useState('');
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState(null);
-  const [dataRows, setDataRows] = useState([]);
+  const [result, setResult] = useState(null);
+  const [dataRows, setDataRows] = useState([]);  // Initialize as an empty array
   const [error, setError] = useState('');
-
+  const [metrics, setMetrics] = useState(null);
+  
   // Handle file input
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -18,16 +18,15 @@ function App() {
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setError(''); // Reset error state
+    setError('');
 
-    if (!file || !targetColumn) {
-      setError("Please upload a file and specify the target column.");
+    if (!file) {
+      setError("Please upload a file.");
       return;
     }
 
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('target_column', targetColumn);
 
     setLoading(true);
 
@@ -38,10 +37,13 @@ function App() {
         },
       });
 
+      console.log("Response from backend:", response.data);
+
       if (response.data) {
-        setResults(response.data);
+        setResult(response.data);
+        setDataRows(response.data.preview || []);  // Set to empty array if undefined
+        setMetrics(response.data.metrics);
         alert(`Fraud count detected: ${response.data.fraud_count}`);
-        setDataRows(response.data.preview_data);
       } else {
         console.error("No data returned from the server");
       }
@@ -53,42 +55,42 @@ function App() {
     }
   };
 
+  const handleDownload = () => {
+    window.location.href = 'http://127.0.0.1:5000/download';
+  };
+
   return (
     <div className="App">
-      <h1>Fraud Detection</h1>
+      <h1>Fraud Detection System</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Upload Dataset (CSV):</label>
-          <input type="file" accept=".csv" onChange={handleFileChange} />
-        </div>
-        <div>
-          <label>Target Column:</label>
-          <input
-            type="text"
-            value={targetColumn}
-            onChange={(e) => setTargetColumn(e.target.value)}
-            placeholder="Enter target column name"
-          />
-        </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
-        <div>
+        <div className="upload-section">
+          <label><strong>Upload Dataset (CSV):</strong></label><br />
+          <input type="file" onChange={handleFileChange} />
+          {error && <p style={{ color: 'red' }}>{error}</p>}
           <button type="submit" disabled={loading}>
             {loading ? "Processing..." : "Submit"}
           </button>
         </div>
       </form>
 
-      {results && (
-        <div className="results">
-          <h2>Results:</h2>
-          <p><strong>Accuracy: </strong>{results.accuracy}</p>
-          <p><strong>Precision: </strong>{results.precision}</p>
-          <p><strong>F1 Score: </strong>{results.f1_score}</p>
-          <p><strong>ROC AUC Score: </strong>{results.roc_auc_score}</p>
-          <p><strong>Fraud Count: </strong>{results.fraud_count}</p>
-          
-          <h3>Preview of First 30 Rows:</h3>
-          {dataRows.length > 0 && (
+      {result && (
+        <div className="result-section">
+          <h2>Fraud Detection Results</h2>
+          <p><strong>Fraud Count: </strong>{result.fraud_count}</p>
+
+          {metrics && (
+            <div className="metrics-section">
+              <h3>Evaluation Metrics:</h3>
+              <p><strong>Accuracy:</strong> {metrics.accuracy}</p>
+              <p><strong>Precision:</strong> {metrics.precision}</p>
+              <p><strong>Recall:</strong> {metrics.recall}</p>
+              <p><strong>F1 Score:</strong> {metrics.f1_score}</p>
+              <p><strong>ROC AUC Score:</strong> {metrics.roc_auc}</p>
+            </div>
+          )}
+
+          <h3>Preview of the dataset (Fraud rows highlighted in red):</h3>
+          {dataRows && dataRows.length > 0 && (
             <table>
               <thead>
                 <tr>
@@ -98,17 +100,28 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-  {dataRows.map((row, index) => (
-    <tr key={index} className={row.Fraud_Detected ? 'fraud-row' : ''}>
-      {Object.values(row).map((value, i) => (
-        <td key={i}>{value}</td>
-      ))}
-    </tr>
-  ))}
+  {dataRows.map((row, index) => {
+    // Define color based on fraud probability
+    let bgColor = 'black';  // Default color
+    if (row.fraud_probability > 0.6) {
+      bgColor = 'red';
+    } else if (row.fraud_probability >= 0.4 && row.fraud_probability <= 0.6) {
+      bgColor = '#f94001';
+    }
+
+    return (
+      <tr key={index} style={{ backgroundColor: bgColor, color: 'white' }}>
+        {Object.values(row).map((value, i) => (
+          <td key={i}>{value}</td>
+        ))}
+      </tr>
+    );
+  })}
 </tbody>
 
             </table>
           )}
+          <button onClick={handleDownload}>Download Results</button>
         </div>
       )}
     </div>
